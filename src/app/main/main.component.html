@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="page-header">
+    <img src="assets/images/shield-large.png" width="70px" />
+    <h1>Lookcipe</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <app-input #ingredientsfield [label]="'Ingredients'"></app-input>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <app-input #seasoningsfield [label]="'Seasonings'"></app-input>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-2 col-md-offset-5">
+    <button type="button" class="btn btn-primary" (click)="triggerSearch()">
+      Search
+    </button>
+  </div>
+</div>
