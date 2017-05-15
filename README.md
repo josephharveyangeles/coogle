@@ -1,4 +1,4 @@
-# Lookcipe
+# Coogle
 
 Recipe Lookup for 'n' ingredients. Ever wanted to cook but you don't know what to cook and you don't like to go out? This app is just for you. This is a simple angular project that I did for practice. It consumes a REST backend built in django [nreciquery](https://github.com/josephharveyangeles/nreciquery/README.md).
 
@@ -6,7 +6,7 @@ Recipe Lookup for 'n' ingredients. Ever wanted to cook but you don't know what t
 
 ```
 git clone https://github.com/josephharveyangeles/angulariments.git
-cd lookcipe
+cd coogle
 npm install
 ng serve
 ```
