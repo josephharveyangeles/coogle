@@ -14,5 +14,6 @@ export interface Recipe {
   seasonings: string[];
   ingredients_details: string;
   directions: string;
+  imageUrl?: string;
 }
 

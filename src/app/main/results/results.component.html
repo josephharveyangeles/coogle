@@ -1,21 +1,37 @@
-<div class="row">
-  <div class="col-md-1 col-md-offset-2">
-    <img src="assets/images/shield-large.png" width="50px" />
+<div class="container-fluid">
+  <div id="header" class="row">
+    <div class="col-md-1 col-md-offset-2">
+      <a href="home">
+        <img src="assets/images/shield-large.png" width="50px" />
+      </a>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <ul class="media-list">
+        <li class="media" *ngFor="let recipe of recipes">
+          <div class="media-left">
+            <img class="media-object" src="assets/images/pic.svg" alt="..." width="150px">
+          </div>
+          <div class="media-body">
+            <a href="#">
+              <h4 class="media-heading">{{recipe.name}}</h4>
+            </a>
+            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+            </p>
+            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <pagination [itemsPerPage]="10" [totalItems]="totalRecipes" [(ngModel)]="currentPage" [maxSize]="5" class="pagination-sm"
+              [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"></pagination>
+    </div>
   </div>
 </div>
-<hr />
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <ul class="media-list">
-      <li class="media">
-        <div class="media-left">
-          <img class="media-object" src="assets/images/pic.svg" alt="...">
-        </div>
-        <div class="media-body">
-          <h4 class="media-heading">Media heading</h4>
-          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
+{{currentPage}}

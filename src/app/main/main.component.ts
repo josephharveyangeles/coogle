@@ -1,11 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { InputComponent } from './input/input.component';
 import { Observable } from 'rxjs/Observable';
 
 import { RecipeRequest } from './recipe-query';
 import { NreciqueryResponse } from './nreciquery-response';
-import { RecipeService } from './recipe.service';
 import { RRHelper, NreciRequest } from './request-response-helper';
+
+import { RecipeService } from './recipe.service';
+import { ResultsService } from './results/results.service';
 
 @Component({
   selector: 'app-main',
@@ -23,7 +26,11 @@ export class MainComponent {
   @ViewChild('seasoningsfield')
   private seasoningsField: InputComponent;
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(
+    private recipeService: RecipeService,
+    private resultsService: ResultsService,
+    private router: Router
+  ) { }
 
   triggerSearch(): void {
     const recipeRequest = this.createRecipeRequest();
@@ -32,8 +39,10 @@ export class MainComponent {
                           (data) => {
                             this.hasResult = true;
                             this.result = RRHelper.parse(data);
+                            this.resultsService.setResult(this.result);
                             console.log(this.result);
                             this.clearFields();
+                            this.router.navigate(['results']);
                       });
   }
 
