@@ -1,16 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { InputComponent } from './input/input.component';
+import { Observable } from 'rxjs/Observable';
 
 import { RecipeRequest } from './recipe-query';
-
+import { NreciqueryResponse } from './nreciquery-response';
 import { RecipeService } from './recipe.service';
+import { RRHelper, NreciRequest } from './request-response-helper';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
+
+  private hasResult = false;
+  private result: NreciqueryResponse;
 
   @ViewChild('ingredientsfield')
   private ingredientsField: InputComponent;
@@ -20,31 +25,30 @@ export class MainComponent implements OnInit {
 
   constructor(private recipeService: RecipeService) { }
 
-  ngOnInit() {
+  triggerSearch(): void {
+    const recipeRequest = this.createRecipeRequest();
+    this.recipeService.getRecipes(RRHelper.buildRequest(recipeRequest))
+                      .subscribe(
+                          (data) => {
+                            this.hasResult = true;
+                            this.result = RRHelper.parse(data);
+                            console.log(this.result);
+                            this.clearFields();
+                      });
   }
 
-  triggerSearch(): void {
-    const ingredients = this.toArray(this.ingredientsField.getInputValue());
-    const seasonings = this.toArray(this.seasoningsField.getInputValue());
-    const iMatchType = this.ingredientsField.getMatchType();
-    const sMatchType = this.seasoningsField.getMatchType();
+  private createRecipeRequest(): NreciRequest {
+    return new NreciRequest(
+                          this.ingredientsField.getInputValue(),
+                          this.seasoningsField.getInputValue(),
+                        )
+                        .setIMatchType(this.ingredientsField.getMatchType())
+                        .setSMatchType(this.seasoningsField.getMatchType());
+  }
 
-    this.recipeService.getRecipes({
-      'ingredients': ingredients,
-      'ingredientsMatchType': iMatchType,
-      'seasonings': seasonings,
-      'seasoningsMatchType': sMatchType
-    });
-
+  private clearFields(): void {
     this.ingredientsField.clear();
     this.seasoningsField.clear();
-  }
-
-  private toArray(value: string): string[] {
-    if (value) {
-      return value.split(/[ ,]+/);
-    }
-    return [];
   }
 
 }

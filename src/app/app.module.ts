@@ -8,12 +8,14 @@ import { MainComponent } from './main/main.component';
 import { InputComponent } from './main/input/input.component';
 
 import { RecipeService } from './main/recipe.service';
+import { ResultsComponent } from './main/results/results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    InputComponent
+    InputComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,

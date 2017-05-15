@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+
 import { RecipeRequest } from './recipe-query';
 
 @Injectable()
 export class RecipeService {
 
-  private static readonly serverURI = 'yev.pythonanywhere.com/recipes';
+  private static readonly serverURI = '//yev.pythonanywhere.com/recipes/';
   private matchMatrix: any = {
     'all': {
       'all': '',
@@ -16,8 +21,11 @@ export class RecipeService {
     }
   };
 
-  getRecipes(requestOb: RecipeRequest) {
-    console.log(this.buildRequestURI(requestOb));
+  constructor(private http: Http) {}
+
+  getRecipes(requestOb: RecipeRequest): Observable<any> {
+    return this.http.get(this.buildRequestURI(requestOb))
+      .map( (res) => res.json() );
   }
 
   private buildRequestURI(requestOb: RecipeRequest): string {
