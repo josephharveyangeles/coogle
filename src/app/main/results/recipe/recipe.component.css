@@ -1,0 +1,36 @@
+span.label {
+    font-size: 0.4em;
+    vertical-align: middle;
+}
+
+.label {
+    color: white;
+    font-weight: bold;
+    font-size: 0.8em;
+    border-radius: 2px;
+    text-align: center;
+    padding: 3px 10px;
+    text-indent: 0;
+    cursor: context-menu;
+    float: left;
+}
+
+.label-group {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.label-group>.label:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+    border-radius: 0;
+}
+
+.label-group>.label:first-child:not(:last-child):not(.dropdown-toggle) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.label-group>.label:last-child:not(:first-child), .lang-group>.dropdown-toggle:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}

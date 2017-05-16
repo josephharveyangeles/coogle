@@ -11,18 +11,7 @@
     <div class="col-md-8 col-md-offset-2">
       <ul class="media-list">
         <li class="media" *ngFor="let recipe of recipes">
-          <div class="media-left">
-            <img class="media-object" src="assets/images/pic.svg" alt="..." width="150px">
-          </div>
-          <div class="media-body">
-            <a href="#">
-              <h4 class="media-heading">{{recipe.name}}</h4>
-            </a>
-            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-            </p>
-            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-            </p>
-          </div>
+          <app-recipe [recipe]="recipe"></app-recipe>
         </li>
       </ul>
     </div>

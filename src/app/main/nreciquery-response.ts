@@ -16,4 +16,3 @@ export interface Recipe {
   directions: string;
   imageUrl?: string;
 }
-

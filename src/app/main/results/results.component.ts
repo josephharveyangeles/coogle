@@ -28,8 +28,23 @@ export class ResultsComponent implements OnInit {
     this.currentPage = 1;
   }
 
-  pageChanged(page: number, itemsPerpage: number) {
-    console.log(page);
+  pageChanged(obj: any) {
+    const toPage = obj.page;
+    if (toPage === 1) {
+      // TODO: verify if currentPage updates after pageChanged() event.
+      console.log('First');
+      return;
+    }
+
+    if (toPage === this.totalPages) {
+      console.log('Last');
+      return;
+    }
+
+    if (toPage > this.currentPage) {
+      console.log('nextLink: ' + this.nextLink);
+    }
+    console.log('prevLink: ' + this.prevLink);
   }
 
 }
