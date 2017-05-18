@@ -1,49 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Recipe, NreciqueryResponse } from '../nreciquery-response';
-import { Http, Response } from '@angular/http';
+import { RRHelper } from '../request-response-helper';
+import { Http, URLSearchParams, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
+import { environment } from '../../../environments/environment';
+
 @Injectable()
 export class ResultsService {
 
-  private response: NreciqueryResponse;
-  private recipes: Recipe[];
-  private totalPages: number;
-  private totalResults: number;
-  private nextLink: string;
-  private previousLink: string;
+  private originParams: URLSearchParams;
 
   constructor(private http: Http) {}
 
-  setResult(response: NreciqueryResponse) {
-    this.response = response;
-    this.recipes = response.results;
-    this.totalPages = response.total_pages;
-    this.totalResults = response.total_results;
-    this.nextLink = response.next;
-    this.previousLink = response.prev;
+  setURLSearchParams(params: URLSearchParams) {
+    this.originParams = params;
   }
 
-  getRecipes(): Recipe[] {
-    return this.recipes;
+  getRecipes(): Observable<NreciqueryResponse> {
+    return this.http.get(environment.api, {
+      search: this.originParams
+    }).map( (res) => res.json() )
+      .map( (res) => RRHelper.parse(res) );
   }
 
-  getTotalPages(): number {
-    return this.totalPages;
+  getNextPrevRecipes(link: string): Observable<NreciqueryResponse> {
+    return this.http.get(link).map( (res) => res.json() )
+                              .map( (res) => RRHelper.parse(res));
   }
 
-  getTotalResults(): number {
-    return this.totalResults;
-  }
-
-  getNextLink(): string {
-    return this.nextLink;
-  }
-
-  getPreviousLink(): string {
-    return this.previousLink;
+  getPage(pageNum: number): Observable<NreciqueryResponse> {
+    const params = this.originParams.clone();
+    params.set('page', '' + pageNum);
+    return this.http.get(environment.api, {
+      search: params
+    }).map( (res) => res.json() )
+      .map( (res) => RRHelper.parse(res) );
   }
 
 }

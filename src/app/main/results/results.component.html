@@ -17,10 +17,9 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-8 col-md-offset-2" *ngIf="recipes">
       <pagination [itemsPerPage]="10" [totalItems]="totalRecipes" [(ngModel)]="currentPage" [maxSize]="5" class="pagination-sm"
               [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"></pagination>
     </div>
   </div>
 </div>
-{{currentPage}}

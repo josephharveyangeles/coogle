@@ -33,17 +33,11 @@ export class MainComponent {
   ) { }
 
   triggerSearch(): void {
-    const recipeRequest = this.createRecipeRequest();
-    this.recipeService.getRecipes(RRHelper.buildRequest(recipeRequest))
-                      .subscribe(
-                          (data) => {
-                            this.hasResult = true;
-                            this.result = RRHelper.parse(data);
-                            this.resultsService.setResult(this.result);
-                            console.log(this.result);
-                            this.clearFields();
-                            this.router.navigate(['results']);
-                      });
+    const recipeRequest = RRHelper.buildRequest(this.createRecipeRequest());
+    const searchParams = this.recipeService.buildRequestParams(recipeRequest);
+    this.resultsService.setURLSearchParams(searchParams);
+    this.router.navigate(['results']);
+    this.clearFields();
   }
 
   private createRecipeRequest(): NreciRequest {

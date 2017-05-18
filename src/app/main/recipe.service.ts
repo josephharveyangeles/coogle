@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, URLSearchParams, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { environment } from '../../environments/environment';
+
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
@@ -9,7 +11,6 @@ import { RecipeRequest } from './recipe-query';
 @Injectable()
 export class RecipeService {
 
-  private static readonly serverURI = '//yev.pythonanywhere.com/recipes/';
   private matchMatrix: any = {
     'all': {
       'all': '',
@@ -23,39 +24,45 @@ export class RecipeService {
 
   constructor(private http: Http) {}
 
-  getRecipes(requestOb: RecipeRequest): Observable<any> {
-    return this.http.get(this.buildRequestURI(requestOb))
-      .map( (res) => res.json() );
+  buildRequestParams(requestOb: RecipeRequest): URLSearchParams {
+    const params = new URLSearchParams();
+    if (requestOb.ingredients.length === 0) {
+      return params;
+    }
+
+    this.setIngredientsParam(requestOb, params);
+    this.setSeasoningsParam(requestOb, params);
+    this.setMatchLevelParam(requestOb, params);
+    return params;
   }
 
-  private buildRequestURI(requestOb: RecipeRequest): string {
+  private setIngredientsParam(requestOb: RecipeRequest, params: URLSearchParams) {
+    params.set('ingredients', requestOb.ingredients.join('|'));
+  }
 
-    if (requestOb.ingredients.length === 0) {
-      return RecipeService.serverURI;
-    }
-
-    let requestURL = RecipeService.serverURI + '?ingredients=' + requestOb.ingredients.join('|');
-
+  private setSeasoningsParam(requestOb: RecipeRequest, params: URLSearchParams) {
     if (this.hasSeasonings(requestOb.seasonings)) {
-      requestURL += '&seasonings=' + requestOb.seasonings.join('|');
+      params.set('seasonings', requestOb.seasonings.join('|'));
+    }
+  }
+
+  private setMatchLevelParam(requestOb: RecipeRequest, params: URLSearchParams) {
+    const matchLevelParam = 'match_any_level';
+    if (!this.hasSeasonings(requestOb.seasonings)) {
+      if (requestOb.ingredientsMatchType === 'any') {
+        params.set(matchLevelParam, 'ingredient');
+      }
+      return;
     }
 
-    requestURL += this.getMatchLevel(requestOb);
-    return requestURL;
+    const iMatchType = requestOb.ingredientsMatchType;
+    const sMatchType = requestOb.seasoningsMatchType;
+    params.set(matchLevelParam, this.matchMatrix[iMatchType][sMatchType]);
   }
 
   private hasSeasonings(seasonings: string[] = null): boolean {
     return seasonings !== null && seasonings.length > 0;
   }
 
-  private getMatchLevel(requestOb: RecipeRequest): string {
-    const matchLevel = '&match_any_level=';
-    if (!this.hasSeasonings(requestOb.seasonings)) {
-      return requestOb.ingredientsMatchType === 'any' ? '&match_any_level=ingredient' : '';
-    }
-    const iMatchType = requestOb.ingredientsMatchType;
-    const sMatchType = requestOb.seasoningsMatchType;
-    return this.matchMatrix[iMatchType][sMatchType];
-  }
 }
 

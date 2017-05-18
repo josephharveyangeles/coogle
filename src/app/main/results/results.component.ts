@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ResultsService } from './results.service';
 
-import { Recipe } from '../nreciquery-response';
+import { Recipe, NreciqueryResponse } from '../nreciquery-response';
 
 @Component({
   selector: 'app-results',
@@ -20,31 +20,60 @@ export class ResultsComponent implements OnInit {
   constructor(private service: ResultsService) { }
 
   ngOnInit() {
-    this.recipes = this.service.getRecipes();
-    this.totalRecipes = this.service.getTotalResults();
-    this.totalPages = this.service.getTotalPages();
-    this.prevLink = this.service.getPreviousLink();
-    this.nextLink = this.service.getNextLink();
-    this.currentPage = 1;
+    this.getFirstPage();
   }
 
+  private getFirstPage(): void {
+    this.service.getRecipes()
+                .subscribe(
+                    (res: NreciqueryResponse) => this.initialize(res, 1)
+                );
+  }
+
+  private initialize(response: NreciqueryResponse, page: number) {
+    this.recipes = response.results;
+    this.totalRecipes = response.total_results;
+    this.totalPages = response.total_pages;
+    this.prevLink = response.prev;
+    this.nextLink = response.next;
+    this.currentPage = page;
+  }
+
+  // TODO: just pass the service.function on fetch*()
+  // TODO: fix service names
+  // TODO: add animations on item hover like on mindspace tutorial
   pageChanged(obj: any) {
     const toPage = obj.page;
     if (toPage === 1) {
-      // TODO: verify if currentPage updates after pageChanged() event.
-      console.log('First');
+      this.getFirstPage();
       return;
     }
 
     if (toPage === this.totalPages) {
       console.log('Last');
+      this.fetchResultsOnPage(toPage);
       return;
     }
 
-    if (toPage > this.currentPage) {
-      console.log('nextLink: ' + this.nextLink);
+    let link = this.nextLink;
+    if (toPage < this.currentPage) {
+      link = this.prevLink;
     }
-    console.log('prevLink: ' + this.prevLink);
+    this.fetchResults(link, toPage);
+  }
+
+  private fetchResults(link: string, page: number) {
+    this.service.getNextPrevRecipes(link)
+                .subscribe(
+                    (res: NreciqueryResponse) => this.initialize(res, page)
+                );
+  }
+
+  private fetchResultsOnPage(page: number) {
+    this.service.getPage(page)
+                .subscribe(
+                    (res: NreciqueryResponse) => this.initialize(res, page)
+                );
   }
 
 }
