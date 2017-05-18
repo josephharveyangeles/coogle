@@ -3,15 +3,6 @@ import { RecipeRequest } from '../dataobjects/request-objects';
 
 export class Parser {
 
-  public static buildRequest(req: RecipeRequest): RecipeRequest {
-    return {
-      'ingredients': req.ingredients,
-      'ingredientsMatchType': req.ingredientsMatchType,
-      'seasonings': req.seasonings,
-      'seasoningsMatchType': req.seasoningsMatchType
-    };
-  }
-
   public static parse(data: any): NreciqueryResponse {
     const result: NreciqueryResponse = {
       total_results: data.count,
