@@ -1,0 +1,39 @@
+import { NreciqueryResponse, Recipe } from '../dataobjects/response-objects';
+import { RecipeRequest } from '../dataobjects/request-objects';
+
+export class Parser {
+
+  public static buildRequest(req: RecipeRequest): RecipeRequest {
+    return {
+      'ingredients': req.ingredients,
+      'ingredientsMatchType': req.ingredientsMatchType,
+      'seasonings': req.seasonings,
+      'seasoningsMatchType': req.seasoningsMatchType
+    };
+  }
+
+  public static parse(data: any): NreciqueryResponse {
+    const result: NreciqueryResponse = {
+      total_results: data.count,
+      total_pages: data.total_pages,
+      prev: data.links.previous,
+      next: data.links.next,
+      results: this.parseRecipes(data.results)
+    };
+    return result;
+  }
+
+  private static parseRecipes(results: any): Recipe[] {
+    return results.map((result) => {
+      return {
+        name: result.name,
+        description: result.description,
+        type: result.type,
+        directions: result.directions,
+        ingredients_details: result.ingredients_details,
+        ingredients: result.ingredients.map((obj) => { return obj.name; }),
+        seasonigs: result.seasonings.map((obj) => { return obj.name; })
+      };
+    });
+  }
+}

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Recipe } from '../../nreciquery-response';
+import { Recipe } from '../../dataobjects/response-objects';
 
 @Component({
   selector: 'app-recipe',

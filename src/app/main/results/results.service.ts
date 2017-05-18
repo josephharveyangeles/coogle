@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Recipe, NreciqueryResponse } from '../nreciquery-response';
-import { RRHelper } from '../request-response-helper';
+import { Recipe, NreciqueryResponse } from '../dataobjects/response-objects';
+import { Parser } from '../utils/parser';
 import { Http, URLSearchParams, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -23,12 +23,12 @@ export class ResultsService {
     return this.http.get(environment.api, {
       search: this.originParams
     }).map( (res) => res.json() )
-      .map( (res) => RRHelper.parse(res) );
+      .map( (res) => Parser.parse(res) );
   }
 
   getNextPrevRecipes(link: string): Observable<NreciqueryResponse> {
     return this.http.get(link).map( (res) => res.json() )
-                              .map( (res) => RRHelper.parse(res));
+                              .map( (res) => Parser.parse(res));
   }
 
   getPage(pageNum: number): Observable<NreciqueryResponse> {
@@ -37,7 +37,7 @@ export class ResultsService {
     return this.http.get(environment.api, {
       search: params
     }).map( (res) => res.json() )
-      .map( (res) => RRHelper.parse(res) );
+      .map( (res) => Parser.parse(res) );
   }
 
 }

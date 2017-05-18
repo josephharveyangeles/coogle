@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, URLSearchParams, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { environment } from '../../environments/environment';
+import { URLSearchParams } from '@angular/http';
 
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-
-import { RecipeRequest } from './recipe-query';
+import { RecipeRequest } from './dataobjects/request-objects';
 
 @Injectable()
 export class RecipeService {
@@ -21,8 +16,6 @@ export class RecipeService {
       'any': '&match_any_level=all'
     }
   };
-
-  constructor(private http: Http) {}
 
   buildRequestParams(requestOb: RecipeRequest): URLSearchParams {
     const params = new URLSearchParams();

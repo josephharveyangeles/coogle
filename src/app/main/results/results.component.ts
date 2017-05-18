@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ResultsService } from './results.service';
 
-import { Recipe, NreciqueryResponse } from '../nreciquery-response';
+import { Recipe, NreciqueryResponse } from '../dataobjects/response-objects';
 
 @Component({
   selector: 'app-results',

@@ -3,9 +3,8 @@ import { Router } from '@angular/router';
 import { InputComponent } from './input/input.component';
 import { Observable } from 'rxjs/Observable';
 
-import { RecipeRequest } from './recipe-query';
-import { NreciqueryResponse } from './nreciquery-response';
-import { RRHelper, NreciRequest } from './request-response-helper';
+import { RecipeRequest, RecipeRequestImpl } from './dataobjects/request-objects';
+import { NreciqueryResponse } from './dataobjects/response-objects';
 
 import { RecipeService } from './recipe.service';
 import { ResultsService } from './results/results.service';
@@ -33,15 +32,15 @@ export class MainComponent {
   ) { }
 
   triggerSearch(): void {
-    const recipeRequest = RRHelper.buildRequest(this.createRecipeRequest());
+    const recipeRequest = this.createRecipeRequest();
     const searchParams = this.recipeService.buildRequestParams(recipeRequest);
     this.resultsService.setURLSearchParams(searchParams);
     this.router.navigate(['results']);
     this.clearFields();
   }
 
-  private createRecipeRequest(): NreciRequest {
-    return new NreciRequest(
+  private createRecipeRequest(): RecipeRequest {
+    return new RecipeRequestImpl(
                           this.ingredientsField.getInputValue(),
                           this.seasoningsField.getInputValue(),
                         )
