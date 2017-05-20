@@ -15,6 +15,7 @@ import { InputComponent } from './main/input/input.component';
 import { RecipesComponent } from './main/recipes/recipes.component';
 import { RecipeItemComponent } from './main/recipes/recipe-item/recipe-item.component';
 import { RandomLabelColorDirective } from './main/directives/random-label-color.directive';
+import { RecipeBodyComponent } from './main/recipes/recipe-body/recipe-body.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
     RecipesComponent,
     RecipeItemComponent,
     RandomLabelColorDirective,
+    RecipeBodyComponent,
   ],
   imports: [
     BrowserModule,

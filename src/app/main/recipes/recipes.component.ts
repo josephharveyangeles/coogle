@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { RecipesService } from './recipes.service';
 import { Recipe, NreciqueryResponse } from '../dataobjects/response-objects';
+import { RecipeBodyComponent } from './recipe-body/recipe-body.component';
 
 @Component({
   selector: 'app-recipes',
@@ -11,12 +12,17 @@ import { Recipe, NreciqueryResponse } from '../dataobjects/response-objects';
 })
 export class RecipesComponent implements OnInit {
 
+  @ViewChild('recipeDialog')
+  private recipeDialog: RecipeBodyComponent;
+
   private recipes: Recipe[];
   private totalRecipes: number;
   private totalPages: number;
   private nextLink: string;
   private prevLink: string;
   private currentPage: number;
+
+  private selectedRecipe: Recipe;
 
   private resultsArrived = false;
 
@@ -45,21 +51,17 @@ export class RecipesComponent implements OnInit {
     this.resultsArrived = false;
     if (toPage === 1) {
       this.getFirstResults();
-      return;
+    } else {
+      this.getPageResults(toPage);
     }
+  }
 
+  private getPageResults(toPage: number): void {
     if (toPage === this.totalPages) {
       this.fetch(() => this.service.getPage(toPage), toPage);
       return;
     }
-
     this.getNextOrPreviousResults(toPage);
-  }
-
-  private fetch( serviceFunction: Function, page: number ) {
-    serviceFunction().subscribe(
-      (res: NreciqueryResponse) => this.initialize(res, page)
-    );
   }
 
   private getNextOrPreviousResults(toPage: number) {
@@ -68,5 +70,16 @@ export class RecipesComponent implements OnInit {
       link = this.prevLink;
     }
     this.fetch(() => this.service.getNextPrevRecipes(link), toPage);
+  }
+
+  private fetch( serviceFunction: Function, page: number ) {
+    serviceFunction().subscribe(
+      (res: NreciqueryResponse) => this.initialize(res, page)
+    );
+  }
+
+  setSelectedRecipe(recipe: Recipe) {
+    this.selectedRecipe = recipe;
+    this.recipeDialog.show();
   }
 }
