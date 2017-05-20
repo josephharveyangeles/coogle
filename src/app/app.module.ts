@@ -7,20 +7,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
-import { ResultsService } from './main/results/results.service';
-import { RecipeService } from './main/recipe.service';
+import { RecipesService } from './main/recipes/recipes.service';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { InputComponent } from './main/input/input.component';
-import { ResultsComponent } from './main/results/results.component';
-import { RecipeComponent } from './main/results/recipe/recipe.component';
+import { RecipesComponent } from './main/recipes/recipes.component';
+import { RecipeItemComponent } from './main/recipes/recipe-item/recipe-item.component';
 import { RandomLabelColorDirective } from './main/directives/random-label-color.directive';
 
 const appRoutes: Routes = [
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: MainComponent },
-  { path: 'results', component: ResultsComponent },
+  { path: 'recipes', component: RecipesComponent },
 ];
 
 @NgModule({
@@ -28,8 +27,8 @@ const appRoutes: Routes = [
     AppComponent,
     MainComponent,
     InputComponent,
-    ResultsComponent,
-    RecipeComponent,
+    RecipesComponent,
+    RecipeItemComponent,
     RandomLabelColorDirective,
   ],
   imports: [
@@ -40,7 +39,7 @@ const appRoutes: Routes = [
     ModalModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [RecipeService, ResultsService],
+  providers: [RecipesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,8 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import { RecipeRequest, RecipeRequestImpl } from './dataobjects/request-objects';
 import { NreciqueryResponse } from './dataobjects/response-objects';
 
-import { RecipeService } from './recipe.service';
-import { ResultsService } from './results/results.service';
+import { APIParamsBuilder } from './utils/params';
+import { RecipesService } from './recipes/recipes.service';
 
 @Component({
   selector: 'app-main',
@@ -16,8 +16,7 @@ import { ResultsService } from './results/results.service';
 })
 export class MainComponent {
 
-  private hasResult = false;
-  private result: NreciqueryResponse;
+  private paramBuilder: APIParamsBuilder;
 
   @ViewChild('ingredientsfield')
   private ingredientsField: InputComponent;
@@ -26,16 +25,17 @@ export class MainComponent {
   private seasoningsField: InputComponent;
 
   constructor(
-    private recipeService: RecipeService,
-    private resultsService: ResultsService,
+    private recipesService: RecipesService,
     private router: Router
-  ) { }
+    ) {
+      this.paramBuilder = new APIParamsBuilder();
+    }
 
   triggerSearch(): void {
     const recipeRequest = this.createRecipeRequest();
-    const searchParams = this.recipeService.buildRequestParams(recipeRequest);
-    this.resultsService.setURLSearchParams(searchParams);
-    this.router.navigate(['results']);
+    const searchParams = this.paramBuilder.build(recipeRequest);
+    this.recipesService.setURLSearchParams(searchParams);
+    this.router.navigate(['recipes']);
     this.clearFields();
   }
 

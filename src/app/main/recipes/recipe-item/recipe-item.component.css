@@ -1,0 +1,64 @@
+span.label {
+  font-size: 0.4em;
+  vertical-align: middle;
+}
+
+.label {
+  color: white;
+  font-weight: bold;
+  font-size: 0.8em;
+  border-radius: 2px;
+  text-align: center;
+  padding: 3px 10px;
+  text-indent: 0;
+  cursor: context-menu;
+  float: left;
+}
+
+.label-group {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.label-group>.label:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+  border-radius: 0;
+}
+
+.label-group>.label:first-child:not(:last-child):not(.dropdown-toggle) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.label-group>.label:last-child:not(:first-child), .lang-group>.dropdown-toggle:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.description {
+  color: #884411;
+}
+
+.details {
+  color: #777777;
+}
+
+.directions {
+  color: #4c4c4c;
+}
+
+.recipe-item-bar {
+  cursor: pointer;
+  -webkit-transition: padding .3s;
+  transition: padding .3s
+}
+
+.recipe-item-bar:hover {
+  padding-left: 15px;
+  border-left: 7px solid #337ab7;
+}
+
+.media-body a:hover, .media-body a:visited, .media-body a:link, .media-body a:active {
+  text-decoration: none;
+  color: #337ab7;
+}

@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 
-import { RecipeRequest } from './dataobjects/request-objects';
+import { RecipeRequest } from '../dataobjects/request-objects';
 
-@Injectable()
-export class RecipeService {
+export class APIParamsBuilder {
 
   private matchMatrix: any = {
     'all': {
@@ -17,7 +15,7 @@ export class RecipeService {
     }
   };
 
-  buildRequestParams(requestOb: RecipeRequest): URLSearchParams {
+  build(requestOb: RecipeRequest): URLSearchParams {
     const params = new URLSearchParams();
     if (requestOb.ingredients.length === 0) {
       return params;

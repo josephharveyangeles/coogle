@@ -2,11 +2,11 @@ import { Component, Input } from '@angular/core';
 import { Recipe } from '../../dataobjects/response-objects';
 
 @Component({
-  selector: 'app-recipe',
-  templateUrl: './recipe.component.html',
-  styleUrls: ['./recipe.component.css']
+  selector: 'app-recipe-item',
+  templateUrl: './recipe-item.component.html',
+  styleUrls: ['./recipe-item.component.css']
 })
-export class RecipeComponent {
+export class RecipeItemComponent {
 
   @Input()
   recipe: Recipe;

@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import { environment } from '../../../environments/environment';
 
 @Injectable()
-export class ResultsService {
+export class RecipesService {
 
   private originParams: URLSearchParams;
 

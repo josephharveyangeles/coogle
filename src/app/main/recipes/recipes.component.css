@@ -1,0 +1,20 @@
+#header {
+  background-color: #fafafa;
+  padding: 20px 0;
+  border-radius: 0;
+}
+
+hr {
+  margin-top: 0px;
+  padding: 0;
+  width: 100%;
+}
+img.loading {
+    position:absolute;
+    width:200px; /*image width */
+    height:200px; /*image height */
+    left:50%;
+    top:50%;
+    margin-left:-100px; /*image width/2 */
+    margin-top:-100px; /*image height/2 */
+}
