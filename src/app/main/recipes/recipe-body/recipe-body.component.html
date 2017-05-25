@@ -2,13 +2,30 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title pull-left title">{{recipe?.name}}</h3>
+        <h1 class="modal-title pull-left title">
+          {{recipe?.name}}
+        </h1>
+        <span class="label label-success">{{recipe?.type | dishTypeFormat}}</span>
         <button type="button" class="close pull-right" (click)="dialog.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p class="directions">{{recipe?.directions}}</p>
+        <div class="row">
+          <div class="col-md-8">
+            <strong>Ingredients: </strong>
+            <p>{{recipe?.ingredients_details}}</p>
+            <hr>
+            <strong>Directions: </strong>
+            <p class="directions">{{recipe?.directions}}</p>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <img src="assets/images/pic.svg" width="100%" />
+              <p>{{recipe?.description}}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

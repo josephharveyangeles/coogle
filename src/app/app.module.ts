@@ -17,14 +17,17 @@ import { RecipeItemComponent } from './main/recipes/recipe-item/recipe-item.comp
 import { RandomLabelColorDirective } from './main/directives/random-label-color.directive';
 import { RecipeBodyComponent } from './main/recipes/recipe-body/recipe-body.component';
 
+import { DishTypeFormatPipe } from './main/pipes/dish-type-format.pipe';
+
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: MainComponent },
+  { path: 'home', redirectTo: '', pathMatch: 'full' },
+  { path: '', component: MainComponent },
   { path: 'recipes', component: RecipesComponent },
 ];
 
 @NgModule({
   declarations: [
+    DishTypeFormatPipe,
     AppComponent,
     MainComponent,
     InputComponent,
