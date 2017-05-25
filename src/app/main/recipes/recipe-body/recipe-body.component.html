@@ -14,10 +14,18 @@
         <div class="row">
           <div class="col-md-8">
             <strong>Ingredients: </strong>
-            <p>{{recipe?.ingredients_details}}</p>
+            <ul>
+              <li *ngFor="let detail of recipe?.ingredients_details">
+                {{detail}}
+              </li>
+            </ul>
             <hr>
             <strong>Directions: </strong>
-            <p class="directions">{{recipe?.directions}}</p>
+            <ol>
+              <li *ngFor="let direction of recipe?.directions">
+                {{direction}}
+              </li>
+            </ol>
           </div>
           <div class="col-md-4">
             <div class="thumbnail">

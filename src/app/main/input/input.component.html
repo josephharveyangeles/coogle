@@ -1,8 +1,7 @@
-<div class="input-group col-md-6 col-md-offset-3">
-  <span class="input-group-addon" id="basic-addon1">{{label}}</span>
-  <input [(ngModel)]="value" type="text" class="form-control" aria-label="..." placeholder="list {{label}} here.." >
+<div class="input-group col-md-6 col-md-offset-3 ">
+  <input [(ngModel)]="value" type="text" class="mainsearch form-control round-corner-left" aria-label="..." placeholder="list {{ label | lowercase }} here..">
   <div class="input-group-btn">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Match {{matchType}} <span class="caret"></span></button>
+    <button type="button" class="btn btn-default dropdown-toggle round-corner-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Match {{matchType}} <span class="caret"></span></button>
     <ul class="dropdown-menu dropdown-menu-right">
       <li><a (click)="matchType = 'all'" href="#">Match All</a></li>
       <li><a (click)="matchType = 'any'">Match Any</a></li>

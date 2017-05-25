@@ -12,7 +12,7 @@ export interface Recipe {
   type: string;
   ingredients: string[];
   seasonings: string[];
-  ingredients_details: string;
-  directions: string;
+  ingredients_details: string[];
+  directions: string[];
   imageUrl?: string;
 }

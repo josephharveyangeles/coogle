@@ -1,0 +1,11 @@
+.mainsearch {
+    background: #fff;
+    padding: 21px 30px !important;
+    box-shadow: 0 14px 24px rgba(50, 48, 58, 0.25);
+    color: #32313A;
+}
+
+.btn {
+  padding: 11px 30px !important;
+  box-shadow: 0 14px 24px rgba(50, 48, 58, 0.25);
+}

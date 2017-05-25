@@ -20,11 +20,16 @@ export class Parser {
         name: result.name,
         description: result.description,
         type: result.type,
-        directions: result.directions,
-        ingredients_details: result.ingredients_details,
-        ingredients: result.ingredients.map((obj) => { return obj.name; }),
-        seasonigs: result.seasonings.map((obj) => { return obj.name; })
+        directions: Parser.sanitize(result.directions),
+        ingredients_details: Parser.sanitize(result.ingredients_details),
+        ingredients: result.ingredients.map( (obj) => obj.name ),
+        seasonigs: result.seasonings.map( (obj) => obj.name )
       };
     });
+  }
+
+  private static sanitize(value: string) {
+    return value.split(/[\n#]+/)
+                .filter( (val) => val.trim() );
   }
 }
