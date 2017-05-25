@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title pull-left title">
-          {{recipe?.name}}
+          {{recipe?.name}} &nbsp;
         </h1>
         <span class="label label-success">{{recipe?.type | dishTypeFormat}}</span>
         <button type="button" class="close pull-right" (click)="dialog.hide()" aria-label="Close">
@@ -24,6 +24,11 @@
               <img src="assets/images/pic.svg" width="100%" />
               <p>{{recipe?.description}}</p>
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button type="button" class="btn btn-primary pull-right" (click)="dialog.hide()">Close</button>
           </div>
         </div>
       </div>
