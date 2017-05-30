@@ -31,4 +31,12 @@ export class InputComponent implements OnInit {
     return this.matchType;
   }
 
+  private toggleMatchType() {
+    if (this.matchType === 'all') {
+      this.matchType = 'any';
+      return;
+    }
+    this.matchType = 'all';
+  }
+
 }

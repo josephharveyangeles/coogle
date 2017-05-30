@@ -1,8 +1,25 @@
 .page-header {
   text-align: center;
-  margin-top: 12%;
+  padding-top: 10%;
+}
+
+.header {
+  padding-top: 12%;
+  padding-bottom: 1%;
+  margin-bottom: 2%;
+  text-align: center;
+  background-color: #337AB7;
+  background: -webkit-linear-gradient(#7B9FF0, #337AB7);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#7B9FF0, #337AB7);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#7B9FF0, #337AB7);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#7B9FF0, #337AB7);
+  /* Standard syntax */
 }
 
 button {
   width: 100%;
+  margin-top: 40% !important;
 }
