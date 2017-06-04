@@ -17,15 +17,17 @@
         {{recipe.ingredients_details}}
       </p>
     </div>
-    <div class="ingredients">
+    <div class="row">
+    <div class="col-md-6">
       <span class="small-italic" *ngFor="let ingredient of recipe.ingredients">
         &nbsp;{{ingredient}}
       </span>
     </div>
-    <div class="seasonings">
+    <div class="col-md-6">
       <span class="small-italic" *ngFor="let seasoning of recipe.seasonings">
         &nbsp;{{seasoning}}
       </span>
     </div>
+  </div>
   </div>
 </div>
