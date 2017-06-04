@@ -69,6 +69,7 @@ img.media-object{
 .label {
   font-size: 0.7em !important;
   vertical-align: middle;
+  border-top-right-radius: 15px;
 }
 
 span.small-italic {
