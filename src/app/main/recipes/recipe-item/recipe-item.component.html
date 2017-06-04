@@ -4,6 +4,7 @@
   </div>
   <div class="media-body">
     <a href="javascript:void(0);">
+      <p [appDishTypeStyle]="recipe.type" class="label pull-right">{{recipe.type | dishTypeFormat}}</p>
       <h4 class="media-heading">
         <strong>{{recipe.name}}</strong>
       </h4>
@@ -15,10 +16,16 @@
       <p class="details">
         {{recipe.ingredients_details}}
       </p>
-      <p [appDishTypeStyle]="recipe.type" class="label">{{recipe.type | dishTypeFormat}}</p>
     </div>
-    <!-- <div class="label-group">
-      <p appRandomLabelColor class="label" *ngFor="let ingredient of recipe.ingredients">{{ingredient}}</p>
-    </div> -->
+    <div class="ingredients">
+      <span class="small-italic" *ngFor="let ingredient of recipe.ingredients">
+        &nbsp;{{ingredient}}
+      </span>
+    </div>
+    <div class="seasonings">
+      <span class="small-italic" *ngFor="let seasoning of recipe.seasonings">
+        &nbsp;{{seasoning}}
+      </span>
+    </div>
   </div>
 </div>

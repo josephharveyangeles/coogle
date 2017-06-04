@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild, OnChanges, SimpleChange } from '@a
 import { ModalDirective } from 'ngx-bootstrap/modal';
 
 import { Recipe } from '../../dataobjects/response-objects';
+import { DISH_TYPE_CLASSES_MAP } from '../../utils/constants';
 
 @Component({
   selector: 'app-recipe-body',
@@ -16,6 +17,8 @@ export class RecipeBodyComponent implements OnChanges {
   @Input('recipe')
   private recipe: Recipe;
 
+  dishtypeclass: string;
+
   public show(): void {
     this.dialog.show();
   }
@@ -24,6 +27,8 @@ export class RecipeBodyComponent implements OnChanges {
     const recipe = changes['recipe'].currentValue;
     if (recipe) {
       this.recipe = recipe;
+      this.dishtypeclass = DISH_TYPE_CLASSES_MAP[recipe.type];
     }
   }
+
 }

@@ -23,7 +23,7 @@ export class Parser {
         directions: Parser.sanitize(result.directions),
         ingredients_details: Parser.sanitize(result.ingredients_details),
         ingredients: result.ingredients.map( (obj) => obj.name ),
-        seasonigs: result.seasonings.map( (obj) => obj.name )
+        seasonings: result.seasonings.map( (obj) => obj.name )
       };
     });
   }

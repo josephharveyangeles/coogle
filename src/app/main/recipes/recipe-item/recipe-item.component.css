@@ -68,4 +68,11 @@ img.media-object{
 
 .label {
   font-size: 0.7em !important;
+  vertical-align: middle;
+}
+
+span.small-italic {
+  font-size: .8em;
+  font-style: italic;
+  vertical-align: middle;
 }

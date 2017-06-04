@@ -1,17 +1,10 @@
 import { Directive, ElementRef, Renderer, Input, OnInit } from '@angular/core';
+import { DISH_TYPE_CLASSES_MAP } from '../utils/constants';
 
 @Directive({
   selector: '[appDishTypeStyle]'
 })
 export class DishTypeStyleDirective implements OnInit {
-
-  private static classes = {
-    'MD' : 'label-primary',
-    'SD': 'label-success',
-    'SN': 'label-info',
-    'ST': 'label-warning',
-    'DS': 'label-danger'
-  };
 
   @Input() appDishTypeStyle: string;
 
@@ -25,7 +18,7 @@ export class DishTypeStyleDirective implements OnInit {
   }
 
   private getClassSytyle() {
-    return DishTypeStyleDirective.classes[this.appDishTypeStyle];
+    return DISH_TYPE_CLASSES_MAP[this.appDishTypeStyle];
   }
 
 }
