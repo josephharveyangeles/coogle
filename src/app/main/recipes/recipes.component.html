@@ -1,4 +1,4 @@
-<div class="container-fluid" >
+<div class="container-fluid">
   <div id="header" class="row">
     <div class="col-md-1 col-md-offset-1">
       <a href="home">
@@ -11,20 +11,21 @@
     <div class="col-md-10 col-md-offset-1">
       <ul class="media-list">
         <li class="media" *ngFor="let recipe of recipes">
-          <app-recipe-item
-          [recipe]="recipe"
-          (onRecipeSelected)="setSelectedRecipe($event)">
+          <app-recipe-item [recipe]="recipe" (onRecipeSelected)="setSelectedRecipe($event)">
           </app-recipe-item>
         </li>
       </ul>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-10 col-md-offset-1" [hidden] = "!resultsArrived" >
-      <pagination [itemsPerPage]="10" [totalItems]="totalRecipes" [(ngModel)]="currentPage" [maxSize]="5" class="pagination-sm"
-              [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"></pagination>
+    <div class="col-md-10 col-md-offset-1" [hidden]="!resultsArrived">
+      <pagination [itemsPerPage]="10" [totalItems]="totalRecipes" [(ngModel)]="currentPage" [maxSize]="5" class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"></pagination>
     </div>
   </div>
 </div>
-<img class="loading" *ngIf="!resultsArrived" src="assets/images/loading.gif" />
-<app-recipe-body #recipeDialog [recipe]="selectedRecipe"><app-recipe-body>
+<img class="loading" *ngIf="!resultsArrived && !errorOccured" src="assets/images/loading.gif" />
+<app-recipe-body #recipeDialog [recipe]="selectedRecipe">
+<app-recipe-body>
+<alert type="danger" *ngIf="errorOccured">
+  <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+</alert>

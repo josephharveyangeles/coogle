@@ -32,8 +32,9 @@ export class RecipesService {
   }
 
   getPage(pageNum: number): Observable<NreciqueryResponse> {
-    const params = this.originParams.clone();
-    params.set('page', '' + pageNum);
+    const params = this.originParams;
+    console.log(this.originParams);
+    // params.set('page', '' + pageNum);
     return this.http.get(environment.api, {
       search: params
     }).map( (res) => res.json() )

@@ -1,8 +1,8 @@
-import { RandomLabelColorDirective } from './random-label-color.directive';
+import { DishTypeStyleDirective } from './dishtype-style.directive';
 
 describe('RandomLabelColorDirective', () => {
   it('should create an instance', () => {
-    // const directive = new RandomLabelColorDirective();
+    // const directive = new DishTypeStyleDirective();
     // expect(directive).toBeTruthy();
   });
 });

@@ -4,7 +4,9 @@
   </div>
   <div class="media-body">
     <a href="javascript:void(0);">
-      <h4 class="media-heading"><strong>{{recipe.name}}</strong></h4>
+      <h4 class="media-heading">
+        <strong>{{recipe.name}}</strong>
+      </h4>
     </a>
     <div>
       <p class="description">
@@ -13,6 +15,7 @@
       <p class="details">
         {{recipe.ingredients_details}}
       </p>
+      <p [appDishTypeStyle]="recipe.type" class="label">{{recipe.type | dishTypeFormat}}</p>
     </div>
     <!-- <div class="label-group">
       <p appRandomLabelColor class="label" *ngFor="let ingredient of recipe.ingredients">{{ingredient}}</p>

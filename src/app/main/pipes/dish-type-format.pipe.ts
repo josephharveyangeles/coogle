@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DISH_TYPE_FORMAT_MAP }  from '../utils/constants';
+import { DISH_TYPE_FORMAT_MAP } from '../utils/constants';
 /*
 * Convert the dish type codes returned from the API into a human-friendly format.
 *

@@ -26,6 +26,8 @@ export class RecipesComponent implements OnInit {
 
   private resultsArrived = false;
 
+  private errorOccured = false;
+
   constructor(private service: RecipesService) { }
 
   ngOnInit() {
@@ -74,8 +76,9 @@ export class RecipesComponent implements OnInit {
 
   private fetch( serviceFunction: Function, page: number ) {
     serviceFunction().subscribe(
-      (res: NreciqueryResponse) => this.initialize(res, page)
-    );
+            (res: NreciqueryResponse) => this.initialize(res, page),
+            (error) => this.errorOccured = true
+          );
   }
 
   setSelectedRecipe(recipe: Recipe) {

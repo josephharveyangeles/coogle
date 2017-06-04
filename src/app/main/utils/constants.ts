@@ -4,4 +4,4 @@ export const DISH_TYPE_FORMAT_MAP = {
   'SN': 'Snack',
   'ST': 'Starter',
   'DS': 'Dessert'
-}
+};

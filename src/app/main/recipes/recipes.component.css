@@ -1,15 +1,6 @@
 #header {
-  background-color: #337AB7;
-  background: -webkit-linear-gradient(#7B9FF0, #337AB7);
-  /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(#7B9FF0, #337AB7);
-  /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(#7B9FF0, #337AB7);
-  /* For Firefox 3.6 to 15 */
-  background: linear-gradient(#7B9FF0, #337AB7);
-  /* Standard syntax */
+  background-color: #fafafa;
   padding: 20px 0;
-  border-radius: 0;
 }
 
 hr {
@@ -17,6 +8,7 @@ hr {
   padding: 0;
   width: 100%;
 }
+
 img.loading {
     position:absolute;
     width:200px; /*image width */
