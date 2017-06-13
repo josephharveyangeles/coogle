@@ -17,7 +17,10 @@
       </ul>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="recipes?.length == 0">
+    <p class="col-md-12">No results.</p>
+  </div>
+  <div class="row" *ngIf="recipes?.length > 0">
     <div class="col-md-10 col-md-offset-1" [hidden]="!resultsArrived">
       <pagination [itemsPerPage]="10" [totalItems]="totalRecipes" [(ngModel)]="currentPage" [maxSize]="5" class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"></pagination>
     </div>

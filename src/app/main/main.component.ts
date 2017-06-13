@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import { RecipeRequest, RecipeRequestImpl } from './dataobjects/request-objects';
 import { NreciqueryResponse } from './dataobjects/response-objects';
 
-import { APIParamsBuilder } from './utils/params';
 import { RecipesService } from './recipes/recipes.service';
 
 @Component({
@@ -15,8 +14,6 @@ import { RecipesService } from './recipes/recipes.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
-
-  private paramBuilder: APIParamsBuilder;
 
   @ViewChild('ingredientsfield')
   private ingredientsField: InputComponent;
@@ -27,16 +24,11 @@ export class MainComponent {
   constructor(
     private recipesService: RecipesService,
     private router: Router
-    ) {
-      this.paramBuilder = new APIParamsBuilder();
-    }
+    ) {}
 
   triggerSearch(): void {
     const recipeRequest = this.createRecipeRequest();
-    const searchParams = this.paramBuilder.build(recipeRequest);
-    this.recipesService.setURLSearchParams(searchParams);
-    this.router.navigate(['recipes']);
-    this.clearFields();
+    this.router.navigate(['recipes', recipeRequest]);
   }
 
   private createRecipeRequest(): RecipeRequest {
@@ -46,11 +38,6 @@ export class MainComponent {
                         )
                         .setIMatchType(this.ingredientsField.getMatchType())
                         .setSMatchType(this.seasoningsField.getMatchType());
-  }
-
-  private clearFields(): void {
-    this.ingredientsField.clear();
-    this.seasoningsField.clear();
   }
 
 }

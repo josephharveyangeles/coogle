@@ -11,6 +11,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { RecipesService } from './main/recipes/recipes.service';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
 import { InputComponent } from './main/input/input.component';
 import { RecipesComponent } from './main/recipes/recipes.component';
@@ -19,12 +20,6 @@ import { DishTypeStyleDirective } from './main/directives/dishtype-style.directi
 import { RecipeBodyComponent } from './main/recipes/recipe-body/recipe-body.component';
 
 import { DishTypeFormatPipe } from './main/pipes/dish-type-format.pipe';
-
-const appRoutes: Routes = [
-  { path: 'home', redirectTo: '', pathMatch: 'full' },
-  { path: '', component: MainComponent },
-  { path: 'recipes', component: RecipesComponent },
-];
 
 @NgModule({
   declarations: [
@@ -44,7 +39,7 @@ const appRoutes: Routes = [
     PaginationModule.forRoot(),
     ModalModule.forRoot(),
     AlertModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    AppRoutingModule
   ],
   providers: [RecipesService],
   bootstrap: [AppComponent]

@@ -17,10 +17,9 @@ export class APIParamsBuilder {
 
   build(requestOb: RecipeRequest): URLSearchParams {
     const params = new URLSearchParams();
-    if (requestOb.ingredients.length === 0) {
+    if (this.isEmpty(requestOb.ingredients)) {
       return params;
     }
-
     this.setIngredientsParam(requestOb, params);
     this.setSeasoningsParam(requestOb, params);
     this.setMatchLevelParam(requestOb, params);
@@ -28,18 +27,18 @@ export class APIParamsBuilder {
   }
 
   private setIngredientsParam(requestOb: RecipeRequest, params: URLSearchParams) {
-    params.set('ingredients', requestOb.ingredients.join('|'));
+    params.set('ingredients', requestOb.ingredients);
   }
 
   private setSeasoningsParam(requestOb: RecipeRequest, params: URLSearchParams) {
-    if (this.hasSeasonings(requestOb.seasonings)) {
-      params.set('seasonings', requestOb.seasonings.join('|'));
+    if (!this.isEmpty(requestOb.seasonings)) {
+      params.set('seasonings', requestOb.seasonings);
     }
   }
 
   private setMatchLevelParam(requestOb: RecipeRequest, params: URLSearchParams) {
     const matchLevelParam = 'match_any_level';
-    if (!this.hasSeasonings(requestOb.seasonings)) {
+    if (this.isEmpty(requestOb.seasonings)) {
       if (requestOb.ingredientsMatchType === 'any') {
         params.set(matchLevelParam, 'ingredient');
       }
@@ -51,9 +50,7 @@ export class APIParamsBuilder {
     params.set(matchLevelParam, this.matchMatrix[iMatchType][sMatchType]);
   }
 
-  private hasSeasonings(seasonings: string[] = null): boolean {
-    return seasonings !== null && seasonings.length > 0;
+  private isEmpty(value: string) {
+    return !value || 0 === value.length;
   }
-
 }
-

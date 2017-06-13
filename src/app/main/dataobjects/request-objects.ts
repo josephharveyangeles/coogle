@@ -1,19 +1,19 @@
 export interface RecipeRequest {
-  ingredients: string[];
+  ingredients: string;
   ingredientsMatchType: string;
-  seasonings?: string[];
+  seasonings?: string;
   seasoningsMatchType?: string;
 }
 
 export class RecipeRequestImpl implements RecipeRequest {
-  ingredients: string[];
+  ingredients: string;
   ingredientsMatchType: string;
-  seasonings?: string[];
+  seasonings?: string;
   seasoningsMatchType?: string;
 
   constructor(ingredients: string, seasonings: string) {
-    this.ingredients = this.toArray(ingredients);
-    this.seasonings = this.toArray(seasonings);
+    this.ingredients = this.normalize(ingredients);
+    this.seasonings = this.normalize(seasonings);
   }
 
   setIMatchType(type: string) {
@@ -26,11 +26,11 @@ export class RecipeRequestImpl implements RecipeRequest {
     return this;
   }
 
-  getIngredients(): string[] {
+  getIngredients(): string {
     return this.ingredients;
   }
 
-  getSeasonings(): string[] {
+  getSeasonings(): string {
     return this.seasonings;
   }
 
@@ -42,10 +42,10 @@ export class RecipeRequestImpl implements RecipeRequest {
     return this.seasoningsMatchType;
   }
 
-  private toArray(value: string): string[] {
+  private normalize(value: string): string {
     if (value) {
-      return value.split(/[ ,]+/);
+      return value.split(/[ ,]+/).join('|');
     }
-    return [];
+    return '';
   }
 }

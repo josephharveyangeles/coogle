@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
 
 import { RecipesService } from './recipes.service';
 import { Recipe, NreciqueryResponse } from '../dataobjects/response-objects';
@@ -23,19 +25,27 @@ export class RecipesComponent implements OnInit {
   private currentPage: number;
 
   private selectedRecipe: Recipe;
-
   private resultsArrived = false;
-
   private errorOccured = false;
+  private params: Params;
 
-  constructor(private service: RecipesService) { }
+  constructor(
+      private service: RecipesService,
+      private route: ActivatedRoute
+  ) { this.params = route.params; }
 
   ngOnInit() {
     this.getFirstResults();
   }
 
   private getFirstResults() {
-    this.fetch( () => this.service.getRecipes(), 1);
+    this.params.switchMap( (params: Params) =>
+                              this.service.getRecipes(params))
+                         .subscribe(
+                           (res: NreciqueryResponse) =>
+                              this.initialize(res, 1),
+                           (error) => this.errorOccured = true
+                         );
   }
 
   private initialize(response: NreciqueryResponse, page: number) {
