@@ -19,6 +19,7 @@ export class Parser {
       return {
         name: result.name,
         description: result.description,
+        imageUrl: result.image,
         type: result.type,
         directions: Parser.sanitize(result.directions),
         ingredients_details: Parser.sanitize(result.ingredients_details),
