@@ -44,8 +44,13 @@ export class RecipeRequestImpl implements RecipeRequest {
 
   private normalize(value: string): string {
     if (value) {
-      return value.split(/[ ,]+/).join('|');
+      return value.split(/[ ,]+/).map(this.totTitleCase).join('|');
     }
     return '';
+  }
+
+  private totTitleCase(str: string) {
+    return str.replace(/\w\S*/g, (txt) =>
+        txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
   }
 }
