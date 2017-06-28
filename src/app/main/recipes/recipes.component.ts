@@ -15,19 +15,19 @@ import { RecipeBodyComponent } from './recipe-body/recipe-body.component';
 export class RecipesComponent implements OnInit {
 
   @ViewChild('recipeDialog')
-  private recipeDialog: RecipeBodyComponent;
+  recipeDialog: RecipeBodyComponent;
 
-  private recipes: Recipe[];
-  private totalRecipes: number;
-  private totalPages: number;
-  private nextLink: string;
-  private prevLink: string;
-  private currentPage: number;
+  recipes: Recipe[];
+  totalRecipes: number;
+  totalPages: number;
+  nextLink: string;
+  prevLink: string;
+  currentPage: number;
 
-  private selectedRecipe: Recipe;
-  private resultsArrived = false;
-  private errorOccured = false;
-  private params: Params;
+  selectedRecipe: Recipe;
+  resultsArrived = false;
+  errorOccured = false;
+  params: Params;
 
   constructor(
       private service: RecipesService,

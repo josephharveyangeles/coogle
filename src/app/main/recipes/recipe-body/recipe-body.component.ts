@@ -15,7 +15,7 @@ export class RecipeBodyComponent implements OnChanges {
   public dialog: ModalDirective;
 
   @Input('recipe')
-  private recipe: Recipe;
+  recipe: Recipe;
 
   dishtypeclass: string;
 

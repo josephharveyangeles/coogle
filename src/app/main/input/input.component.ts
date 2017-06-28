@@ -10,8 +10,8 @@ export class InputComponent implements OnInit {
   @Input()
   label: string;
 
-  private value: string;
-  private matchType = 'all';
+  value: string;
+  matchType = 'all';
 
   constructor() { }
 
@@ -31,7 +31,7 @@ export class InputComponent implements OnInit {
     return this.matchType;
   }
 
-  private toggleMatchType() {
+  toggleMatchType() {
     if (this.matchType === 'all') {
       this.matchType = 'any';
       return;
