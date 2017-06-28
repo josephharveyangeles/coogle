@@ -2,6 +2,8 @@
 
 Recipe Lookup for 'n' ingredients. Ever wanted to cook but you don't know what to cook and you don't like to go out? This app is just for you. This is a simple angular project that I did for practice. It consumes a REST backend built in django [nreciquery](https://github.com/josephharveyangeles/nreciquery/README.md).
 
+The app is currently live and hosted as a gh-page, check it out [here](https://josephharveyangeles.github.io/recigle/#/).
+
 ## Getting Started
 
 ```
